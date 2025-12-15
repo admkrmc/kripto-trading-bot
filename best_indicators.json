@@ -1,0 +1,150 @@
+{
+  "top_10_indicators": [
+    {
+      "rank": 21,
+      "name": "volatility_kcw",
+      "test_accuracy": 0.6383157894736842,
+      "f1_score": 0.3445750038150465,
+      "precision": 0.39133448873483534,
+      "recall": 0.30779716466739365,
+      "signal_rate": 24.294736842105262,
+      "threshold": 0.9298854568767984,
+      "direction": "UP",
+      "score": 0.4420491364965956
+    },
+    {
+      "rank": 30,
+      "name": "volatility_atr",
+      "test_accuracy": 0.4397473684210526,
+      "f1_score": 0.4822970975021399,
+      "precision": 0.3374714145704018,
+      "recall": 0.8448745910577972,
+      "signal_rate": 77.33052631578947,
+      "threshold": 185.50762126847127,
+      "direction": "UP",
+      "score": 0.4405670421914661
+    },
+    {
+      "rank": 4,
+      "name": "volume_fi",
+      "test_accuracy": 0.6367157894736842,
+      "f1_score": 0.3282466521332918,
+      "precision": 0.38271604938271603,
+      "recall": 0.28735005452562706,
+      "signal_rate": 23.19157894736842,
+      "threshold": -9056.103854415509,
+      "direction": "DOWN",
+      "score": 0.4316812727852944
+    },
+    {
+      "rank": 14,
+      "name": "volatility_bbw",
+      "test_accuracy": 0.6169263157894737,
+      "f1_score": 0.3463141255927576,
+      "precision": 0.3661501063506533,
+      "recall": 0.32851690294438385,
+      "signal_rate": 27.713684210526317,
+      "threshold": 1.8441055739354453,
+      "direction": "UP",
+      "score": 0.43146497880335155
+    },
+    {
+      "rank": 76,
+      "name": "momentum_roc",
+      "test_accuracy": 0.6208842105263158,
+      "f1_score": 0.341812865497076,
+      "precision": 0.36853720050441363,
+      "recall": 0.3187022900763359,
+      "signal_rate": 26.71157894736842,
+      "threshold": -0.35124639822366543,
+      "direction": "DOWN",
+      "score": 0.4308791360073154
+    },
+    {
+      "rank": 31,
+      "name": "volatility_ui",
+      "test_accuracy": 0.6240842105263158,
+      "f1_score": 0.3374888691006233,
+      "precision": 0.37035830618892507,
+      "recall": 0.3099781897491821,
+      "signal_rate": 25.852631578947367,
+      "threshold": 0.8136615987121545,
+      "direction": "UP",
+      "score": 0.43004135894599144
+    },
+    {
+      "rank": 6,
+      "name": "volume_sma_em",
+      "test_accuracy": 0.5354947368421052,
+      "f1_score": 0.401085776330076,
+      "precision": 0.3332731865752436,
+      "recall": 0.5035441657579062,
+      "signal_rate": 46.66947368421053,
+      "threshold": -167159253.84550512,
+      "direction": "DOWN",
+      "score": 0.42784594653271835
+    },
+    {
+      "rank": 28,
+      "name": "volatility_dcw",
+      "test_accuracy": 0.6285473684210526,
+      "f1_score": 0.32932948152653185,
+      "precision": 0.3722928841526298,
+      "recall": 0.2952562704471101,
+      "signal_rate": 24.49684210526316,
+      "threshold": 2.216964502533517,
+      "direction": "UP",
+      "score": 0.4276875281201077
+    },
+    {
+      "rank": 75,
+      "name": "momentum_ao",
+      "test_accuracy": 0.5598315789473685,
+      "f1_score": 0.37884729649435533,
+      "precision": 0.33579102591110177,
+      "recall": 0.4345692475463468,
+      "signal_rate": 39.974736842105266,
+      "threshold": -117.43724999999812,
+      "direction": "DOWN",
+      "score": 0.4245313271136086
+    },
+    {
+      "rank": 32,
+      "name": "trend_macd",
+      "test_accuracy": 0.5561263157894737,
+      "f1_score": 0.381120112715745,
+      "precision": 0.33470818725510415,
+      "recall": 0.4424754634678299,
+      "signal_rate": 40.833684210526314,
+      "threshold": -49.375849218564326,
+      "direction": "DOWN",
+      "score": 0.42433958854573545
+    }
+  ],
+  "selected_3_for_bot": [
+    {
+      "name": "momentum_roc",
+      "category": "momentum",
+      "test_accuracy": 0.6208842105263158,
+      "f1_score": 0.341812865497076,
+      "threshold": -0.35124639822366543,
+      "direction": "DOWN"
+    },
+    {
+      "name": "trend_macd",
+      "category": "trend",
+      "test_accuracy": 0.5561263157894737,
+      "f1_score": 0.381120112715745,
+      "threshold": -49.375849218564326,
+      "direction": "DOWN"
+    },
+    {
+      "name": "volatility_kcw",
+      "category": "volatility",
+      "test_accuracy": 0.6383157894736842,
+      "f1_score": 0.3445750038150465,
+      "threshold": 0.9298854568767984,
+      "direction": "UP"
+    }
+  ]
+}
