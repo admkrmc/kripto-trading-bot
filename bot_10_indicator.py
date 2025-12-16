@@ -134,6 +134,19 @@ PUMP_VOLUME_MULTIPLIER = 5  # 5x hacim artışı = pump
 PROTECT_OPEN_POSITIONS = True  # Açık pozisyon varsa listede kal
 EXCLUDED_FIAT_PAIRS = ['TRY', 'EUR', 'GBP', 'BRL', 'ARS', 'RUB', 'UAH', 'BIDR', 'AUD', 'NGN', 'PLN', 'RON', 'ZAR', 'VAI']  # Fiat çiftleri hariç
 
+# v7.5: FELAKET COINLER BLACKLIST (3,906 trade analizinden!)
+COIN_BLACKLIST = [
+    'LUNCUSDT',      # %11.1 WR - FELAKET!
+    'ACEUSDT',       # %18.2 WR - ÇOK KÖTÜ
+    'ORDIUSDT',      # %17.7 WR - ÇOK KÖTÜ
+    'NILUSDT',       # %0 WR - SIFIR!
+    'ADAUSDT',       # %29.2 WR - KÖTÜ
+    'ALLOUSDT',      # %30.0 WR - KÖTÜ
+    'VOXELUSDT',     # %32.3 WR - KÖTÜ
+    'METUSDT',       # %33.3 WR - KÖTÜ
+    '1000CHEEMSUSDT' # %36.4 WR - KÖTÜ
+]
+
 # BAŞLANGIÇ LİSTESİ (İlk çalıştırmada kullanılır, sonra dinamik güncellenir)
 TRADING_PAIRS = [
     "BTCUSDT", "ETHUSDT", "USDCUSDT", "SOLUSDT", "ZECUSDT",
@@ -247,6 +260,14 @@ state = {
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
+
+def is_trading_hours():
+    """v7.5: Sadece gündüz saatlerinde işlem yap (gece kayıpları önleme)"""
+    current_hour = datetime.now().hour
+    # Gece 21:00 - 04:00 arası KAPALI (analiz: -$268 zarar!)
+    if 21 <= current_hour or current_hour < 4:
+        return False
+    return True
 
 def add_log(message, level="INFO"):
     """Log mesajı ekle"""
@@ -1609,6 +1630,13 @@ def trading_loop():
 
     while state['running']:
         try:
+            # v7.5: GECE MODU KONTROLÜ (21:00-04:00 arası işlem YOK!)
+            if not is_trading_hours():
+                current_hour = datetime.now().hour
+                add_log(f"🌙 GECE MODU: Saat {current_hour}:00 - Trading KAPALI (analiz: gece -$268 zarar)", "INFO")
+                time.sleep(300)  # 5 dakika bekle
+                continue
+
             state['scan_count'] += 1
 
             # PİYASA TRENDİNİ GÜNCELLE (Her 60 saniyede bir)
@@ -1685,6 +1713,10 @@ def trading_loop():
             for symbol in coins_to_scan:
                 if not state['running']:
                     break
+
+                # v7.5: BLACKLIST KONTROLÜ (felaket coinler)
+                if symbol in COIN_BLACKLIST:
+                    continue  # Bu coini atla
 
                 # Zaten bu coin'de pozisyon var mı?
                 has_position = any(p['symbol'] == symbol for p in state['open_positions'])
