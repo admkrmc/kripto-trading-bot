@@ -48,7 +48,7 @@ TAKE_PROFIT_PERCENT = 0.025  # 2.5% (OPTİMİZE: daha fazla kar)
 SCAN_INTERVAL = 2  # 2 saniye (OPTİMİZE: daha hızlı)
 MAX_OPEN_POSITIONS = 999  # SINIRSIZ - Para bitene kadar işlem aç
 FUTURES_LEVERAGE = 5  # 5x (KULLANICI İSTEĞİ: sabit)
-AUTO_START = False  # MANUEL BAŞLATMA
+AUTO_START = True  # OTOMATİK BAŞLATMA (Render için gerekli!)
 
 # ADAPTİF ÖĞRENME SİSTEMİ AYARLARI
 ADAPTIVE_LEARNING = True  # Öğrenme sistemini aktifleştir
