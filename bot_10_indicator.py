@@ -38,7 +38,7 @@ if sys.platform == 'win32':
 # CONFIGURATION
 # ============================================================================
 
-DEMO_MODE = False
+DEMO_MODE = True  # v7.4: TEST MODU (karlılık görene kadar demo)
 DEMO_BALANCE = 1000  # $1000 başlangıç
 TRADE_AMOUNT = 15  # $15 per trade - SABİT TUTAR (DÜŞÜRÜLDÜ: zarar kontrolü)
 COMMISSION_RATE = 0.0005  # 0.05% komisyon (Binance futures TAKER fee - gerçek oran)
