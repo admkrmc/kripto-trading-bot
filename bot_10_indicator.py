@@ -1702,24 +1702,28 @@ def trading_loop():
                 # 10 indikatörü kontrol et
                 signal, buy_votes, sell_votes = check_10_indicator_signals(symbol)
 
-                # v7.2: PİYASA TRENDİNE GÖRE GÜÇLÜ ÖNCELİKLENDİRME (HIZLI KARAR!)
+                # v7.3: AGRESİF PİYASA TRENDİ TAKİBİ (KARŞI YÖN TAMAMEN İPTAL!)
                 if MARKET_TREND_ENABLED:
                     market_trend = state['market_trend']
                     original_buy = buy_votes
                     original_sell = sell_votes
 
                     if market_trend == 'BULLISH':
-                        # 🚀 Yükseliş trendinde: LONG sinyalleri 3x güçlü, SHORT sinyalleri AZALT (IPTAL ETME!)
+                        # 🚀 Yükseliş trendinde: LONG sinyalleri 3x güçlü, SHORT sinyalleri TAMAMEN İPTAL!
                         buy_votes = min(10, int(buy_votes * MARKET_TREND_LONG_MULTIPLIER))
-                        sell_votes = max(1, int(sell_votes * 0.6))  # %40 azalt ama IPTAL ETME!
+                        sell_votes = 0  # KARŞI YÖNÜ TAMAMEN İPTAL ET!
                         if original_buy > 0 and buy_votes > original_buy:
                             add_log(f"🚀 {symbol} LONG BOOST: {original_buy} → {buy_votes} oy (BULLISH market)", "BOOST")
+                        if original_sell > 0:
+                            add_log(f"⛔ {symbol} SHORT İPTAL: {original_sell} oy (BULLISH market, karşı yön)", "CANCEL")
                     elif market_trend == 'BEARISH':
-                        # 📉 Düşüş trendinde: SHORT sinyalleri 3x güçlü, LONG sinyalleri AZALT (IPTAL ETME!)
+                        # 📉 Düşüş trendinde: SHORT sinyalleri 3x güçlü, LONG sinyalleri TAMAMEN İPTAL!
                         sell_votes = min(10, int(sell_votes * MARKET_TREND_SHORT_MULTIPLIER))
-                        buy_votes = max(1, int(buy_votes * 0.6))  # %40 azalt ama IPTAL ETME!
+                        buy_votes = 0  # KARŞI YÖNÜ TAMAMEN İPTAL ET!
                         if original_sell > 0 and sell_votes > original_sell:
                             add_log(f"📉 {symbol} SHORT BOOST: {original_sell} → {sell_votes} oy (BEARISH market)", "BOOST")
+                        if original_buy > 0:
+                            add_log(f"⛔ {symbol} LONG İPTAL: {original_buy} oy (BEARISH market, karşı yön)", "CANCEL")
                     # SIDEWAYS ise değişiklik yok
 
                 # Min threshold'u geçen sinyalleri topla
