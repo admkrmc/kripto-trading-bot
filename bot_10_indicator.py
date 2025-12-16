@@ -46,7 +46,7 @@ STOP_LOSS_PERCENT = 0.006  # 0.6% (DÜZELTME: slippage buffer için dar tutuldu)
 SLIPPAGE_BUFFER = 0.002  # 0.2% slippage buffer (gerçek max zarar: 0.8%)
 TAKE_PROFIT_PERCENT = 0.025  # 2.5% (OPTİMİZE: daha fazla kar)
 SCAN_INTERVAL = 2  # 2 saniye (OPTİMİZE: daha hızlı)
-MAX_OPEN_POSITIONS = 999  # SINIRSIZ - Para bitene kadar işlem aç
+MAX_OPEN_POSITIONS = 15  # v7.4: GÜVENLİ LİMİT (max $225 risk, %22.5 portföy)
 FUTURES_LEVERAGE = 5  # 5x (KULLANICI İSTEĞİ: sabit)
 AUTO_START = True  # OTOMATİK BAŞLATMA (Render için gerekli!)
 
@@ -56,8 +56,8 @@ MIN_INDICATOR_VOTES = 3  # Başlangıç değeri (OPTİMİZE: 4→3, daha fazla i
 ANALYSIS_INTERVAL = 8  # Her 8 işlemde bir analiz yap (OPTİMİZE: daha sık öğrenme)
 COIN_BLACKLIST_HOURS = 12  # Kötü coinler 12 saat kara listede (OPTİMİZE: daha az kısıtlama)
 TARGET_WIN_RATE = 0.55  # %55 doğruluk hedefi (OPTİMİZE: daha yüksek hedef)
-IDLE_PROFIT_CLOSE_MINUTES = 3  # 3dk işlem yoksa kardakileri kapat (OPTİMİZE: daha hızlı)
-IDLE_PROFIT_THRESHOLD = 0.5  # $0.5 ve üzeri kar (OPTİMİZE: küçük karları da al)
+IDLE_PROFIT_CLOSE_MINUTES = 10  # v7.4: 10dk (trend devam etsin, büyük karlara izin ver)
+IDLE_PROFIT_THRESHOLD = 1.0  # v7.4: $1.0+ kar (erken kapamayı önle, komisyon $0.075)
 
 # TRAILING TAKE PROFIT AYARLARI
 TRAILING_TP_ACTIVATION_PERCENT = 0.04  # %4 kar olunca trailing TP aktif
@@ -105,10 +105,10 @@ POSITION_SIZE_BY_VOTES = {
     3: 15    # 3/10 oy → $15 (OPTİMİZE: yeni eklendi, minimum)
 }
 
-# VOLATİLİTE (OYNAKLIK) FİLTRESİ - Çok durgun veya çok çılgın coinlerden kaçın (OPTİMİZE)
+# VOLATİLİTE (OYNAKLIK) FİLTRESİ - Çok durgun veya çok çılgın coinlerden kaçın (v7.4: KONSERVATIF)
 VOLATILITY_FILTER_ENABLED = True  # Volatilite filtresi aktif
 MIN_VOLATILITY_24H = 0.3  # Minimum %0.3 24h fiyat değişimi (OPTİMİZE: daha fazla coin)
-MAX_VOLATILITY_24H = 20.0  # Maximum %20 24h fiyat değişimi (OPTİMİZE: yüksek volatilite=yüksek kar)
+MAX_VOLATILITY_24H = 10.0  # v7.4: %10 max (slippage riski azaltıldı, 20→10)
 
 # v7.2: PİYASA TRENDİ ALGILAMA - HIZLI KARAR MERCİSİ!
 MARKET_TREND_ENABLED = True  # Market trend algılama aktif
@@ -118,8 +118,8 @@ MARKET_TREND_PERIOD = 20  # 20 mumla trend hesapla (HIZLI TEPKIME! 30→20)
 MARKET_TREND_LONG_MULTIPLIER = 3.0  # Piyasa yükselişte LONG sinyalleri 3x ağırlıklı
 MARKET_TREND_SHORT_MULTIPLIER = 3.0  # Piyasa düşüşte SHORT sinyalleri 3x ağırlıklı
 
-# YENİ FİLTRELER (OPTİMİZE v6.0 - GÜÇLÜ İNDİKATÖRLER)
-MIN_24H_VOLUME = 1_000_000  # Minimum 24h hacim: $1M (SHORT artışı için daha fazla coin!)
+# YENİ FİLTRELER (v7.4: LİKİDİTE GÜVENLİĞİ)
+MIN_24H_VOLUME = 5_000_000  # v7.4: Min $5M hacim (likidite güvenliği, 1M→5M)
 MIN_VOLATILITY_PERCENT = 0.0015  # Minimum volatilite: ATR > fiyatın %0.15'ü (OPTİMİZE: daha geniş)
 MOMENTUM_CHECK_ENABLED = True  # Fiyat yönü doğrulaması (sinyal yönü ile uyumlu olmalı)
 
